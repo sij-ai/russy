@@ -35,8 +35,26 @@ class RssBot:
         self.client = AsyncClient(self.server, self.username)
         
         self.feeds = self.config["rss"]
-        self.interval = self.config.get("interval", 3600)
+        
+        # Hardcoded default interval (overridable per feed)
+        self.default_interval = 3600  # 1 hour
+
         self.state = self.load_state()
+
+    async def process_feeds_loop(self):
+        """Loop that checks each RSS feed at its configured interval."""
+        while True:
+            for feed in self.feeds:
+                await self.process_feed(feed)
+                feed_interval = feed.get("interval", self.default_interval)  # Per-feed override
+                self.logger.info(f"Waiting {feed_interval} seconds before checking {feed['name']} again...")
+                await asyncio.sleep(feed_interval)
+
+    async def main(self):
+        await self.login()
+        await self.join_rooms_from_feeds()
+        asyncio.create_task(self.process_feeds_loop())
+        await self.client.sync_forever(timeout=30000, full_state=True)
 
     def setup_logging(self):
         self.logger = logging.getLogger("rss_bot")
@@ -158,18 +176,6 @@ class RssBot:
             self.state[name].append(entry_id)
 
         self.save_state()
-
-    async def main(self):
-        await self.login()
-        await self.join_rooms_from_feeds()
-        asyncio.create_task(self.process_feeds_loop())
-        await self.client.sync_forever(timeout=30000, full_state=True)
-
-    async def process_feeds_loop(self):
-        while True:
-            await self.post_rss_entries()
-            self.logger.info(f"Waiting {self.interval} seconds until next check...")
-            await asyncio.sleep(self.interval)
 
     async def post_rss_entries(self):
         for feed in self.feeds:

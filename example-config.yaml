@@ -1,0 +1,13 @@
+matrix:
+  server: "https://we2.ee"
+  username: "@ai:we2.ee"
+  password: "y0urPa55w0rd"
+
+rss:
+  - name: "blog"
+    feed: "https://sij.law/rss/"
+    room: "#sij:we2.ee"
+
+  - name: "code"
+    feed: "https://sij.ai/sij.rss"
+    room: "#sij.ai:we2.ee"

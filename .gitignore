@@ -1,3 +1,5 @@
+*.log
+
 # Python cache and build artifacts
 __pycache__/
 *.py[cod]
@@ -16,12 +18,6 @@ venv/
 .DS_Store
 .idea/
 .vscode/
-
-# llux-specific
-temp/
-temp_dir/
-temp_images/
-llux.log
 
 # Local config files
 config.yaml

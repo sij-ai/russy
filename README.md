@@ -38,7 +38,7 @@
 
      - name: "World News"
        feed: "https://news.com/world/feed"
-       room: "worldnews:matrix.org"
+       room: "#worldnews:matrix.org"
        interval: 60
    ```
 

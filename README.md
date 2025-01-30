@@ -25,21 +25,21 @@
    Set the **Matrix server**, bot credentials, and RSS feeds. Example:
 
    ```yaml
-  matrix:
-    server: "https://we2.ee"
-    username: "@bot:we2.ee"
-    password: "yourpassword"
+   matrix:
+     server: "https://we2.ee"
+     username: "@bot:we2.ee"
+     password: "yourpassword"
 
-  rss:
-    - name: "Tech News"
-      feed: "https://example.com/rss"
-      room: "#tech:we2.ee"
-      interval: 3600
+   rss:
+     - name: "Tech News"
+       feed: "https://example.com/rss"
+       room: "#tech:we2.ee"
+       interval: 3600
 
-    - name: "World News"
-      feed: "https://news.com/world/feed"
-      room: "worldnews:matrix.org"
-      interval: 60
+     - name: "World News"
+       feed: "https://news.com/world/feed"
+       room: "worldnews:matrix.org"
+       interval: 60
    ```
 
 ---

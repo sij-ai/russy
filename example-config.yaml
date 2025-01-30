@@ -6,4 +6,10 @@ matrix:
 rss:
   - name: "Tech News"
     feed: "https://example.com/rss"
-    room: "#news:we2.ee"
+    room: "#tech:we2.ee"
+    interval: 3600
+
+  - name: "World News"
+    feed: "https://news.com/world/feed"
+    room: "worldnews:matrix.org"
+    interval: 60

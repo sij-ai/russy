@@ -21,7 +21,7 @@ from nio import (
 CONFIG_FILE = "config.yaml"
 STATE_FILE = ".state"
 
-class RssLluxStyle:
+class RssBot:
     def __init__(self):
         self.setup_logging()
         self.config = self.load_config()
@@ -39,10 +39,10 @@ class RssLluxStyle:
         self.state = self.load_state()
 
     def setup_logging(self):
-        self.logger = logging.getLogger("rss_llux_style")
+        self.logger = logging.getLogger("rss_bot")
         self.logger.setLevel(logging.DEBUG)
 
-        fh = logging.FileHandler("rss_llux_style.log")
+        fh = logging.FileHandler("rss_bot.log")
         fh.setLevel(logging.DEBUG)
 
         ch = logging.StreamHandler()
@@ -88,7 +88,7 @@ class RssLluxStyle:
         """Join all feed rooms and store their real room IDs."""
         unique_rooms = set(feed["room"] for feed in self.feeds)
         for room_alias in unique_rooms:
-            self.logger.info(f"Attempting to join {room_alias} (llux-style).")
+            self.logger.info(f"Attempting to join {room_alias}.")
             try:
                 resp = await self.client.join(room_alias)
                 if isinstance(resp, JoinResponse) and hasattr(resp, "room_id"):
@@ -176,7 +176,7 @@ class RssLluxStyle:
             await self.process_feed(feed)
 
 def main():
-    bot = RssLluxStyle()
+    bot = RssBot()
     asyncio.run(bot.main())
 
 if __name__ == "__main__":

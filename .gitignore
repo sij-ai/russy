@@ -1,3 +1,4 @@
+.state
 *.log
 
 # Python cache and build artifacts
